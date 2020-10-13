@@ -1,27 +1,28 @@
 import React from 'react';
+import _ from 'lodash';
 import '../../css/table.css'
 
 class Table extends React.Component {
     render() {
-        const { data } = this.props;
+        const { data, sortTable, onClickRowHandle } = this.props;
 
         return(
             <div className='table'>
                 <table className='main-table'>
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>FIRST NAME</th>
-                            <th>LAST NAME</th>
-                            <th>EMAIL</th>
-                            <th>PHONE NUMBER</th>
+                            <th onClick={() => sortTable('id')}>ID</th>
+                            <th onClick={() => sortTable('firstName')}>FIRST NAME</th>
+                            <th onClick={() => sortTable('lastName')}>LAST NAME</th>
+                            <th onClick={() => sortTable('email')}>EMAIL</th>
+                            <th onClick={() => sortTable('phone')}>PHONE NUMBER</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
                             data.map((user) => {
                                 return (
-                                    <tr>
+                                    <tr key={_.uniqueId()} onClick={() => onClickRowHandle(user)}>
                                         <td>{user.id}</td>
                                         <td>{user.firstName}</td>
                                         <td>{user.lastName}</td>
